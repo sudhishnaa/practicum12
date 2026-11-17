@@ -1,0 +1,664 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pet Sphere - Pet Care Management</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #eef4ff;
+    color: #1a2a3a;
+}
+
+/* HEADER */
+header {
+    background: #233b70;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    border-bottom: 5px solid #8bb8f0;
+}
+
+header h1 {
+    font-size: 38px;
+    letter-spacing: 1px;
+}
+
+header h1 span {
+    color: #8bb8f0;
+}
+
+header p {
+    margin-top: 8px;
+    color: #d9dee3;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+/* NAVIGATION */
+nav {
+    background: #8bb8f0;
+    padding: 14px;
+    text-align: center;
+}
+
+nav a {
+    color: #1a2a3a;
+    text-decoration: none;
+    margin: 15px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* MAIN CONTAINER */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 25px auto;
+}
+
+/* ARCHITECTURE */
+.architecture {
+    background: white;
+    border: 1px solid #d9d9d9;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-top: 5px solid #233b70;
+    box-shadow: 0 3px 12px #00000012;
+}
+
+.architecture h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #233b70;
+}
+
+.client {
+    background: #e4efff;
+    border: 1px solid #8bb8f0;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.devices {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 12px;
+}
+
+.device {
+    background: white;
+    padding: 12px 22px;
+    border: 1px solid #233b70;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.project {
+    background: #f0f2f3;
+    padding: 15px;
+}
+
+.project h3 {
+    margin-bottom: 12px;
+}
+
+.application {
+    background: #d5e6ff;
+    border: 1px solid #6c9ce0;
+    padding: 20px;
+}
+
+.services {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.service-group {
+    background: #e4efff;
+    border: 1px solid #8bb8f0;
+    padding: 12px;
+}
+
+.service {
+    background: white;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+    text-align: center;
+    color: #233b70;
+    font-weight: bold;
+}
+
+.arrow {
+    text-align: center;
+    font-size: 22px;
+    color: #233b70;
+    padding: 5px;
+}
+
+/* PET SPHERE FORM */
+.card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    border-top: 5px solid #8bb8f0;
+    box-shadow: 0 3px 12px #00000015;
+}
+
+.card h2 {
+    color: #233b70;
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #555;
+}
+
+label {
+    display: block;
+    margin-top: 14px;
+    font-weight: bold;
+    color: #233b70;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 7px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+input:focus, select:focus {
+    outline: 2px solid #8bb8f0;
+    border-color: #8bb8f0;
+}
+
+button {
+    background: #233b70;
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 18px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #2878d0;
+}
+
+#message {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+#result {
+    background: #e4efff;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+    border: 1px solid #8bb8f0;
+}
+
+#apiData {
+    background: #f0f2f3;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+    overflow-wrap: anywhere;
+}
+
+footer {
+    background: #233b70;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    border-top: 5px solid #8bb8f0;
+}
+
+@media(max-width:650px) {
+    .services {
+        grid-template-columns: 1fr;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 7px;
+    }
+
+    .container {
+        width: 95%;
+    }
+
+    .devices {
+        flex-wrap: wrap;
+    }
+
+    header h1 {
+        font-size: 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PET SPHERE HEADER -->
+<header>
+    <h1>Pet <span>Sphere</span></h1>
+    <p>CARE • LOVE • PROTECT</p>
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="#home">Home</a>
+    <a href="#architecture">Architecture</a>
+    <a href="#register">Register Pet</a>
+    <a href="#services">Services</a>
+</nav>
+
+<div class="container" id="home">
+
+<!-- PET SPHERE CLOUD ARCHITECTURE -->
+<section class="architecture" id="architecture">
+
+    <h2>Pet Sphere - Application Architecture</h2>
+
+    <div class="client">
+        <h3>CLIENT</h3>
+
+        <div class="devices">
+            <div class="device">📱<br>Mobile Device</div>
+            <div class="device">💻<br>Desktop Device</div>
+        </div>
+    </div>
+
+    <div class="project">
+
+        <h3>Pet Sphere Cloud Project</h3>
+
+        <div class="application">
+
+            <h3>PET CARE APPLICATION</h3>
+
+            <div class="arrow">⬇ 1</div>
+
+            <div class="services">
+
+                <div class="service-group">
+
+                    <div class="service">Pet Care CDN</div>
+
+                    <div class="service">Load Balancing</div>
+
+                    <div class="arrow">⬇ 2</div>
+
+                    <div class="service">Cloud Storage</div>
+
+                </div>
+
+                <div>
+
+                    <div class="service">Cloud Firestore</div>
+
+                    <div class="arrow">⬇</div>
+
+                    <div class="service">Cloud Run</div>
+
+                    <div class="arrow">⬆ 5</div>
+
+                    <div class="service">Secret Manager</div>
+
+                </div>
+
+            </div>
+
+            <div class="arrow">
+                1 Client Request → Application
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+<!-- PET REGISTRATION -->
+<section class="card" id="register">
+
+    <h2>Pet Sphere Registration</h2>
+
+    <p>Register your pet to access our pet care services.</p>
+
+    <form id="petForm">
+
+        <label for="owner">Owner Name</label>
+
+        <input type="text" id="owner"
+        placeholder="Enter owner name" required minlength="3">
+
+        <label for="email">Email Address</label>
+
+        <input type="email" id="email"
+        placeholder="Enter your email" required>
+
+        <label for="petName">Pet Name</label>
+
+        <input type="text" id="petName"
+        placeholder="Enter pet name" required>
+
+        <label for="age">Pet Age (Years)</label>
+
+        <input type="number" id="age"
+        placeholder="Enter pet age" min="0" max="50" required>
+
+        <label for="weight">Pet Weight (kg)</label>
+
+        <input type="number" id="weight"
+        placeholder="Enter pet weight" min="0.1" max="300" step="0.1" required>
+
+        <label for="petType">Pet Type</label>
+
+        <select id="petType" required>
+            <option value="">Select Pet Type</option>
+            <option value="Dog">Dog</option>
+            <option value="Cat">Cat</option>
+            <option value="Bird">Bird</option>
+            <option value="Rabbit">Rabbit</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="service">Pet Care Service</label>
+
+        <select id="service" required>
+            <option value="">Select Service</option>
+            <option value="Feeding">Feeding</option>
+            <option value="Health">Health Care</option>
+            <option value="Grooming">Grooming</option>
+            <option value="Training">Training</option>
+        </select>
+
+        <button type="submit">Register Pet</button>
+
+    </form>
+
+    <div id="message"></div>
+
+    <div id="result"></div>
+
+</section>
+
+
+<!-- API DATA MANAGEMENT -->
+<section class="card" id="services">
+
+    <h2>Pet Care Data Management</h2>
+
+    <p>
+        Click below to retrieve pet care information
+        using the Fetch API.
+    </p>
+
+    <button onclick="getPetData()">
+        Fetch Pet Data
+    </button>
+
+    <div id="apiData">
+        Pet data will appear here.
+    </div>
+
+</section>
+
+</div>
+
+<footer>
+    <p>© 2026 Pet Sphere | All Rights Reserved</p>
+</footer>
+
+
+<script>
+
+// 1. JAVASCRIPT FUNCTION
+
+function calculatePetAge(age) {
+
+    let petAge = age * 7;
+
+    return petAge;
+}
+
+
+// 2. INPUT VALIDATION
+
+function validateInput(owner, email, petName, age, weight, petType, service) {
+
+    if (owner.trim().length < 3) {
+        return "Owner name must contain at least 3 characters.";
+    }
+
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+        return "Please enter a valid email address.";
+    }
+
+    if (petName.trim() === "") {
+        return "Please enter your pet name.";
+    }
+
+    if (age < 0 || age > 50 || !Number.isFinite(age)) {
+        return "Please enter a valid pet age.";
+    }
+
+    if (weight <= 0 || weight > 300 || !Number.isFinite(weight)) {
+        return "Please enter a valid pet weight.";
+    }
+
+    if (petType === "") {
+        return "Please select a pet type.";
+    }
+
+    if (service === "") {
+        return "Please select a pet care service.";
+    }
+
+    return "VALID";
+}
+
+
+// 3. FORM SUBMISSION
+
+document.getElementById("petForm")
+.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    try {
+
+        let owner = document.getElementById("owner").value;
+        let email = document.getElementById("email").value;
+        let petName = document.getElementById("petName").value;
+        let age = Number(document.getElementById("age").value);
+        let weight = Number(document.getElementById("weight").value);
+        let petType = document.getElementById("petType").value;
+        let service = document.getElementById("service").value;
+
+        let validation = validateInput(
+            owner, email, petName, age,
+            weight, petType, service
+        );
+
+        if (validation !== "VALID") {
+
+            document.getElementById("message").style.color = "red";
+
+            document.getElementById("message").innerText = validation;
+
+            return;
+        }
+
+        let petAge = calculatePetAge(age);
+
+        let petData = {
+            owner: owner,
+            email: email,
+            petName: petName,
+            age: age,
+            weight: weight,
+            petType: petType,
+            service: service,
+            petAge: petAge
+        };
+
+        console.log("Validated Pet Sphere Data:", petData);
+
+        document.getElementById("message").style.color = "green";
+
+        document.getElementById("message").innerText =
+        "Pet registration details validated successfully!";
+
+        document.getElementById("result").innerHTML =
+        "<h3>Pet Registration Details</h3>" +
+        "<p>Owner Name: " + petData.owner + "</p>" +
+        "<p>Email: " + petData.email + "</p>" +
+        "<p>Pet Name: " + petData.petName + "</p>" +
+        "<p>Pet Age: " + petData.age + " years</p>" +
+        "<p>Pet Weight: " + petData.weight + " kg</p>" +
+        "<p>Pet Type: " + petData.petType + "</p>" +
+        "<p>Service: " + petData.service + "</p>";
+
+        localStorage.setItem("petMember", JSON.stringify(petData));
+
+        await sendPetData(petData);
+
+    }
+
+    catch(error) {
+
+        console.error("Registration Error:", error);
+
+        document.getElementById("message").innerText =
+        "An error occurred. Please try again.";
+
+    }
+
+});
+
+
+// 4. FETCH API - GET REQUEST
+
+async function getPetData() {
+
+    let output = document.getElementById("apiData");
+
+    output.innerText = "Loading pet care data...";
+
+    try {
+
+        let response = await fetch(
+            "https://jsonplaceholder.typicode.com/posts/1"
+        );
+
+        if (!response.ok) {
+            throw new Error("API request failed");
+        }
+
+        let data = await response.json();
+
+        console.log("API GET Response:", data);
+
+        output.innerHTML =
+        "<h3>Pet Care Data Retrieved</h3>" +
+        "<p>Pet ID: " + data.id + "</p>" +
+        "<p>Pet Information: " + data.title + "</p>" +
+        "<p>Details: " + data.body + "</p>";
+
+    }
+
+    catch(error) {
+
+        console.error("Fetch Error:", error);
+
+        output.innerText =
+        "Unable to retrieve data. Check your internet connection.";
+
+    }
+
+}
+
+
+// 5. API POST REQUEST
+
+async function sendPetData(petData) {
+
+    try {
+
+        let response = await fetch(
+            "https://jsonplaceholder.typicode.com/posts",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(petData)
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Data submission failed");
+        }
+
+        let data = await response.json();
+
+        console.log("API POST Response:", data);
+
+        document.getElementById("message").innerText +=
+        " Demo API submission successful!";
+
+    }
+
+    catch(error) {
+
+        console.error("API POST Error:", error);
+
+        document.getElementById("message").innerText +=
+        " API submission failed, but data is stored locally.";
+
+    }
+
+}
+
+
+// 6. DEBUGGING FUNCTION
+
+console.log("Pet Sphere Application Loaded Successfully.");
+
+</script>
+
+</body>
+</html>
